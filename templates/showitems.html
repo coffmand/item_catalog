@@ -1,0 +1,61 @@
+{% extends "common.html" %}
+{% block content %}
+{% include "header.html" %}
+
+  <main>
+
+    <hr>
+
+
+    <div class="pane">
+      <div class="title-pane">
+        <div class="title-pane-header">
+          <h1>Items for Category:</h1>
+          <h1 id="item-category-name">{{category.name}}</h1>
+        </div>
+        <br>
+        <div class="newbackpane">
+          <a class="access-back" href="{{url_for('showCategories')}}">Back</a>
+          {%if 'username' in session and category.user_id == session.user_id %}
+            <a class="access-new" href="{{url_for('newItem', category_id=category_id)}}" title="Create New Item in Database">Add New Item</a>
+          {% endif %}
+        </div>
+      </div>
+      <!-- Display Flash Msgs -->
+      <div class="flash">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+
+            <ul>
+              {% for message in messages %}
+                <li><strong>{{message}}</strong></li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+      </div>
+
+      {% for i in items %}
+        <div class="content-pane">
+          <div class="nameOnly">
+            <h2>{{i.name}}</h2>
+          </div>
+          <div class="showeditdeletepane">
+            <a class="access-show" href="{{url_for('showItem', category_id=i.category_id, item_id=i.id)}}" title="Show Item Details">Show Item</a>
+            {%if 'username' in session and session.user_id == i.user_id%}
+              <a class="access-edit" href="{{url_for('editItem', category_id=i.category_id, item_id=i.id)}}" title="Edit Item data in Database">Edit Item</a>
+              <a class="access-delete" href="{{url_for('deleteItem', category_id=i.category_id, item_id=i.id)}}" title="Delete Item from Database">Delete Item</a>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+
+    </div>
+
+
+    <hr>
+
+  </main>
+
+{% include "footer.html" %}
+{% endblock %}

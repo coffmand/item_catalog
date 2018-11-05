@@ -1,0 +1,38 @@
+    <header>
+      <!-- Logo (Imbedded SVG code) -->
+      <svg class="logo-dhc" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55">
+        <title>Responsive Logo</title>
+        <circle class="logo-bg-cir" cx="27.5" cy="27.5" r="25"/>
+        <path class="logo-fg-sqs" d="M25,5 h5v5h-5z M5,25 h5v5h-5z M25,45 h5v5h-5z M45,25 h5v5h-5z"/>
+        <circle class="logo-fg-cir" cx="27.5" cy="7.5" r="1"/>
+        <circle class="logo-fg-cir" cx="7.5" cy="27.5" r="1"/>
+        <circle class="logo-fg-cir" cx="27.5" cy="47.5" r="1"/>
+        <circle class="logo-fg-cir" cx="47.5" cy="27.5" r="1"/>
+        <path class="logo-fg-sides"
+              d="M27.5,7.5 L5,25 L10,25 Z
+                 M27.5,7.5 L10,25 L10,30 Z
+                 M7.5,27.5 L25,45 L25,50 Z
+                 M7.5,27.5 L25,45 L30,45 Z
+                 M27.5,47.5 L45,25 L45,30 Z
+                 M27.5,47.5 L45,30 L50,30 Z
+                 M47.5,27.5 L25,10 L30,10 Z
+                 M47.5,27.5 L30,10 L30,5 Z"/>
+      </svg>
+      <div class="header-title">
+        <h1 class="name">Item Catalog</h1>
+      </div>
+      <container class="nav-common">
+        <div class="login">
+          {%if 'username' not in session %}
+            <a href="{{url_for('showLogin')}}">Click Here to Login </a>
+          {% else %}
+            <a href="{{url_for('disconnect')}}">Logout </a>
+          {% endif %}
+        </div>
+        <div class="home">
+          <a href="{{url_for('showCategories')}}">Home</a>
+        </div>
+      </container>
+    </header>
+
+

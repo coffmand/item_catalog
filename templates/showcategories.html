@@ -1,0 +1,64 @@
+{% extends "common.html" %}
+{% block content %}
+{% include "header.html" %}
+
+  <main>
+
+    <hr>
+
+
+    <div class="pane">
+      <div class="title-pane">
+        <div class="title-pane-header">
+          <h1>Categories</h1>
+        </div>
+        <br>
+        <div class="newbackpane">
+          <a class="access-back" href="{{url_for('showCategories')}}">Back</a>
+          {%if 'username' in session %}
+            <a class="access-new" href="{{url_for('newCategory')}}" title="Create New Category in Database">Add New Category</a>
+          {% endif %}
+        </div>
+      </div>
+      <!-- Display Flash Msgs -->
+      <div class="flash">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+
+            <ul>
+              {% for message in messages %}
+                <li><strong>{{message}}</strong></li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+      </div>
+
+      {% for i in categories %}
+        <div class="content-pane">
+          <div class="nameOnly">
+            <h2>{{i.name}}</h2>
+          </div>
+          <div class="showeditdeletepane">
+            <a class="access-show" href="{{url_for('showItems',category_id=i.id)}}" title="Show Items in Category">Show Items</a>
+            <!-- #####################################################################
+                 User must be Logged In and must be the Owner/Creator of the Category
+                 in order to Edit or Delete
+                 #####################################################################-->
+            {%if 'username' in session and session.user_id == i.user_id%}
+              <a class="access-edit" href="{{url_for('editCategory',category_id=i.id)}}" title="Edit Category data in Database">Edit Category</a>
+              <a class="access-delete" href="{{url_for('deleteCategory',category_id=i.id)}}" title="Delete Category from Database">Delete Category</a>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+
+    </div>
+
+
+    <hr>
+
+  </main>
+
+{% include "footer.html" %}
+{% endblock %}

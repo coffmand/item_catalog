@@ -1,0 +1,79 @@
+{% extends "common.html" %}
+{% block content %}
+{% include "header.html" %}
+
+  <main>
+
+    <hr>
+
+
+    <div class="dialog-pane">
+
+      <div class="dialog-header">
+        <h1>Edit an Item for Category:</h1>
+        <h1 class="dialog-header-shift">{{category.name}}</h1>
+      </div>
+      <br>
+      <div class="newbackpane">
+        <a class="access-back" href="{{url_for('showItems', category_id=category_id)}}">Back</a>
+      </div>
+      <hr>
+      <form class="the-form" action="{{url_for('editItem', category_id=category_id, item_id=item_id)}}" method='POST'>
+        <ul class="form-group">
+          <li class="form-row">
+            <label for="name">Name:</label>
+            <input type ="text" name="name" title="Item Name Field" minlength="1" value="{{item.name}}" required>
+          </li>
+          <li class="form-row">
+            <label for="description">Description:</label>
+            <textarea name='description' rows='5' minlength="1"  wrap='hard' title="Item Description Field" required>{{item.description}}</textarea>
+          </li>
+          <li class="form-row">
+            <label for="picture">Picture File URL/Address:</label>
+            <input type ="text" name="picture" title="Picture File URL/Address Field" value="{{item.picture}}">
+          </li>
+          <li class="form-row">
+            <label for="cat_id_sel">Category:</label>
+            <select id="cat_id_sel" name="cat_id_sel" title="Category that Item belongs to (Category must be owned by User)" size="5">
+              {% for cat in category_list %}
+                {% if cat.id == category_id %}
+                  <option selected value="{{cat.id}}">Cat ID: {{cat.id}} - {{cat.name}}</option>
+                {% else %}
+                  <option  value="{{cat.id}}">Cat ID: {{cat.id}} - {{cat.name}}</option>
+                {% endif %}
+              {% endfor %}
+            </select>
+          </li>
+          <!-- Submit Button -->
+          <li class="form-row">
+            <button type='submit' class="access-submit-create" title="Save Changes to Item in the Database">Save Changes</button>
+          </li>
+        </ul>
+      </form>
+      <hr>
+      <div class="showeditdeletepane">
+        <div class="access-cancel">
+          <a href="{{url_for('showItems', category_id=category_id)}}" title="Cancel Saving Changes to Item">Cancel</a>
+        </div>
+      </div>
+    </div>
+    <!-- Display Flash Msgs -->
+    <div class="flash">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+
+          <ul>
+            {% for message in messages %}
+              <li><strong>{{message}}</strong></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+    </div>
+
+    <hr>
+
+  </main>
+
+{% include "footer.html" %}
+{% endblock %}

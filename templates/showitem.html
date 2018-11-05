@@ -1,0 +1,55 @@
+{% extends "common.html" %}
+{% block content %}
+{% include "header.html" %}
+
+  <main>
+
+    <hr>
+
+
+    <div class="pane">
+      <div class="title-pane">
+        <div class="title-pane-header">
+          <h1>Description and Picture for Item:</h1>
+          <h1 id="item-category-name">{{item.name}}</h1>
+        </div>
+        <br>
+        <div class="newbackpane">
+          <a class="access-back" href="{{url_for('showItems', category_id=category_id)}}">Back</a>
+        </div>
+      </div>
+      <!-- Display Flash Msgs -->
+      <div class="flash">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+
+            <ul>
+              {% for message in messages %}
+                <li><strong>{{message}}</strong></li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+      </div>
+
+      <div class="content-pane">
+        <div class="descriptionOnly">
+          <p>{{item.description}}</p>
+        </div>
+        <div class="image-container">
+          {% if item.picture %}
+            <img class="image" src={{item.picture}} alt="">
+          {% else %}
+            <img class="image" src="{{ url_for('static', filename='no_image_warning_240x160.jpg') }}" alt="">
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
+
+    <hr>
+
+  </main>
+
+{% include "footer.html" %}
+{% endblock %}

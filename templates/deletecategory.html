@@ -1,0 +1,58 @@
+{% extends "common.html" %}
+{% block content %}
+{% include "header.html" %}
+
+  <main>
+
+    <hr>
+
+
+    <div class="dialog-pane">
+
+      <div class="dialog-header">
+        <h1>Delete a Category:</h1>
+        <h1 id="item-category-name">{{category.name}}</h1>
+      </div>
+      <br>
+      <div class="newbackpane">
+        <a class="access-back" href="{{url_for('showCategories')}}">Back</a>
+      </div>
+      <hr>
+      <br>
+      <br>
+      <div  class="dialog-form">
+        <form action="{{url_for('deleteCategory', category_id=category_id)}}" method='POST'>
+          <div class="form-group">
+            <p>Verify deletion of Category: <strong> {{category.name}} </strong> and all of its Child Items</p>
+            <input type='submit' class="access-submit-delete" value='Delete' title="Delete Category from the Database">
+          </div>
+        </form>
+      </div>
+      <hr>
+      <div class="showeditdeletepane">
+        <div class="access-cancel">
+          <a href="{{url_for('showCategories')}}" title="Cancel Deletion of Category">Cancel</a>
+        </div>
+      </div>
+    </div>
+    <!-- Display Flash Msgs -->
+    <div class="flash">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+
+          <ul>
+            {% for message in messages %}
+              <li><strong>{{message}}</strong></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+    </div>
+
+
+    <hr>
+
+  </main>
+
+{% include "footer.html" %}
+{% endblock %}

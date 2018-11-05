@@ -1,0 +1,59 @@
+{% extends "common.html" %}
+{% block content %}
+{% include "header.html" %}
+
+  <main>
+
+    <hr>
+
+
+    <div class="dialog-pane">
+
+      <div class="dialog-header">
+        <h1>Edit a Category:</h1>
+      </div>
+      <br>
+      <div class="newbackpane">
+        <a class="access-back" href="{{url_for('showCategories')}}">Back</a>
+      </div>
+      <hr>
+      <form class="the-form" action="{{url_for('editCategory', category_id=category_id)}}" method='POST'>
+        <ul class="form-group">
+          <li class="form-row">
+            <label for="name">Name:</label>
+            <input type ="text" name="name" title="Category Name Field" value="{{category.name}}" minlength="1" required>
+          </li>
+          <!-- Submit Button -->
+          <li class="form-row">
+            <button type='submit' class="access-submit-create" title="Edit a Category and Save the changes to the Database">Save Changes</button>
+          </li>
+        </ul>
+      </form>
+      <hr>
+      <div class="showeditdeletepane">
+        <div class="access-cancel">
+          <a href="{{url_for('showCategories')}}" title="Cancel Editing of the Category">Cancel</a>
+        </div>
+      </div>
+    </div>
+    <!-- Display Flash Msgs -->
+    <div class="flash">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+
+          <ul>
+            {% for message in messages %}
+              <li><strong>{{message}}</strong></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+    </div>
+
+
+    <hr>
+
+  </main>
+
+{% include "footer.html" %}
+{% endblock %}

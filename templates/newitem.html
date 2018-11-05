@@ -1,0 +1,68 @@
+{% extends "common.html" %}
+{% block content %}
+{% include "header.html" %}
+
+  <main>
+
+    <hr>
+
+
+    <div class="dialog-pane">
+
+      <div class="dialog-header">
+        <h1>Create a New Item for Category:</h1>
+        <h1 class="dialog-header-shift">{{category.name}}</h1>
+      </div>
+      <br>
+      <div class="newbackpane">
+        <a class="access-back" href="{{url_for('showItems', category_id=category_id)}}">Back</a>
+      </div>
+      <hr>
+      <form class="the-form" action="{{url_for('newItem', category_id=category_id)}}" method='POST'>
+        <ul class="form-group">
+          <li class="form-row">
+            <label for="name">Name:</label>
+            <input type ="text" name="name" title="Item Name Field" minlength="1" required>
+          </li>
+          <li class="form-row">
+            <label for="description">Description:</label>
+            <textarea name='description' rows='5'  wrap='hard' title="Item Description Field" minlength="1" required></textarea>
+          </li>
+          <li class="form-row">
+            <label for="picture">Picture File URL/Address:</label>
+            <input type ="text" name="picture" title="Picture File URL/Address Field">
+          </li>
+          <!-- Submit Button -->
+          <li class="form-row">
+            <button type='submit' class="access-submit-create" title="Create New Item and add it to the Database">Create</button>
+          </li>
+        </ul>
+      </form>
+      <hr>
+      <div class="showeditdeletepane">
+        <div class="access-cancel">
+          <a href="{{url_for('showItems', category_id=category_id)}}" title="Cancel Creation of New Item">Cancel</a>
+        </div>
+      </div>
+    </div>
+    <!-- Display Flash Msgs -->
+    <div class="flash">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+
+          <ul>
+            {% for message in messages %}
+              <li><strong>{{message}}</strong></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+    </div>
+
+
+    <hr>
+
+  </main>
+
+{% include "footer.html" %}
+{% endblock %}
