@@ -1,0 +1,115 @@
+
+@media screen and (min-width: 550px) and (max-width: 767px) {
+
+  body {
+    transition: all 0.2s;
+  }
+
+  .name {
+    font-size: 42px;
+  }
+
+  .title-pane-header {
+    font-size: 18px;
+  }
+
+  .dialog-header {
+    font-size: 18px;
+  }
+
+  .nameOnly {
+    font-size: 14px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .logo-dhc {
+    width: 70px;
+    height: 70px;
+  }
+
+  .author-note {
+    font-size: 14px;
+  }
+
+}
+
+
+@media screen and (min-width: 768px) and (max-width: 899px) {
+
+  body {
+    transition: all 0.2s;
+  }
+
+  .name {
+    font-size: 46px;
+  }
+
+  .title-pane-header {
+    font-size: 18px;
+  }
+
+  .dialog-header {
+    font-size: 18px;
+  }
+
+  .nameOnly {
+    font-size: 14px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .logo-dhc {
+    width: 80px;
+    height: 80px;
+  }
+
+  .author-note {
+    font-size: 14px;
+  }
+
+}
+
+/* Max optimum layout width - lock width and turn on auto X-axis margins */
+@media screen and (min-width: 900px) {
+  body {
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: all 0.2s;
+  }
+
+  .name {
+    font-size: 52px;
+  }
+
+  .title-pane-header {
+    font-size: 20px;
+  }
+
+  .dialog-header {
+    font-size: 20px;
+  }
+
+  .nameOnly {
+    font-size: 16px;
+  }
+
+  .title {
+    font-size: 26px;
+  }
+
+  .logo-dhc {
+    width: 90px;
+    height: 90px;
+  }
+
+  .author-note {
+    font-size: 14px;
+  }
+
+}
