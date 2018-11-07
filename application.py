@@ -638,7 +638,9 @@ def allCategoriesJSON():
     if categories.count() != 0:
         return jsonify(Categories=[c.serialize for c in categories])
     else:
-        return "No Category Records found"
+        response = make_response(json.dumps('No Category Records found.'), 404)
+        response.headers['Content-Type'] = 'application/json'
+        return response
 
 
 # JSON API to view selected Category Information
@@ -651,8 +653,10 @@ def categoryJSON(category_id):
         category = session.query(Category).filter_by(id=category_id).one()
         return jsonify(Category=category.serialize)
     except exc.NoResultFound:
-        return "No Category Record found with id Field = %s" \
-            % category_id
+        response = make_response(json.dumps(
+            "No Category Record found with id Field = %s" % category_id), 404)
+        response.headers['Content-Type'] = 'application/json'
+        return response
 
 
 # JSON API to view Items for a Category
@@ -670,10 +674,14 @@ def itemsByCategoryJSON(category_id):
     if items.count() != 0:
         return jsonify(Items=[i.serialize for i in items])
     else:
-        return "No Item Records found with category_id Field = %s" \
-            % category_id
+        response = make_response(json.dumps(
+            "No Item Records found with category_id Field = %s"
+            % category_id), 404)
+        response.headers['Content-Type'] = 'application/json'
+        return response
 
 
+# ===========================================
 # JSON API to view selected Item Information
 # ===========================================
 # - Generate a descriptive error_str to help User understand
@@ -705,7 +713,9 @@ def itemJSON(category_id, item_id):
         error_str += "No Item Record found with category_id Field" \
             " = %s and item_id Field = %s" \
             % (category_id, item_id)
-        return error_str
+        response = make_response(json.dumps(error_str), 404)
+        response.headers['Content-Type'] = 'application/json'
+        return response
 
 
 # ###################### ######################################################
